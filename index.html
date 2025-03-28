@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="description" content="Cássio Winkler, Analista de Sistemas, Guarapuava">
+    <meta name="keywords" content="Cássio Winkler, Analista de Sistemas, Guarapuava">
+    <meta name="author" content="Cássio Winkler">
+    <meta property="og:title" content="Cássio Winkler - Analista de Sistemas">
+    <meta property="og:image" content="https://lionitc.com/archivos/multimedia/Publicaciones/IT-Solutions-Company.jpg">
+    <meta property="og:description" content="Cássio Winkler, Analista de Sistemas">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="wr.eti.br">
+    <title>Cássio Winkler</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #121212; color: white; text-align: center; padding: 20px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .container { max-width: 380px; width: 100%; background: #1e1e1e; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); }
+        .logo { 
+            width: 80px; 
+            margin-bottom: 30px; 
+            border-radius: 60%;
+            object-fit: cover; 
+        }
+        .btn { display: block; background: linear-gradient(45deg, #007bff, #00d4ff); color: white; padding: 15px; margin: 10px 0; text-decoration: none; border-radius: 30px; font-weight: bold; transition: 0.3s ease-in-out; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); }
+        .btn:hover { transform: scale(1.05); }
+        .social-icons { display: flex; justify-content: center; margin-top: 15px; }
+        .social-icons a { margin: 0 10px; }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25D366; padding: 10px; border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }
+        .whatsapp-float img { width: 50px; }
+        footer { margin-top: 20px; font-size: 14px; opacity: 0.7; }
+
+        /* Modal */
+        .modal { display: none; position: fixed; z-index: 10; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; }
+        .modal-content { background: #1e1e1e; padding: 30px; border-radius: 15px; text-align: center; width: 90%; max-width: 500px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); }
+        .modal-content h2 { margin-bottom: 20px; font-size: 24px; }
+        .modal-content p { margin: 10px 0; font-size: 18px; }
+        .close { color: white; font-size: 28px; float: right; cursor: pointer; font-weight: bold; }
+        .close:hover { color: #f00; }
+
+        /* Estilo para o formulário de currículo */
+        .form-container {
+            padding: 20px;
+            background: #2c2c2c;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .form-container input, .form-container button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        document.addEventListener("contextmenu", event => event.preventDefault());
+        document.addEventListener("keydown", function (event) {
+            if (event.keyCode == 123 || (event.ctrlKey && event.shiftKey && (event.keyCode == 73 || event.keyCode == 74))) {
+                event.preventDefault();
+            }
+        });
+
+        function decode(str) {
+            return atob(str);
+        }
+
+        // Validar e Enviar Currículo para WhatsApp
+        function enviarCurriculo() {
+            var nomeCompleto = document.getElementById("nomeCompleto").value;
+            var telefone = document.getElementById("telefone").value;
+            var email = document.getElementById("email").value;
+            var empresa = document.getElementById("empresa").value;
+
+            // Verificando se todos os campos obrigatórios estão preenchidos
+            if (!nomeCompleto || !telefone || !email || !empresa) {
+                alert("Por favor, preencha todos os campos obrigatórios.");
+                return; // Impede o envio caso algum campo esteja vazio
+            }
+
+            var mensagem = `Olá, eu ${nomeCompleto}, ${telefone}, ${email} da empresa ${empresa} gostaria de receber seu currículo.`;
+
+            // Gerar URL do WhatsApp com a mensagem
+            var url = 'https://wa.me/' + decode('NTU0Mjk5OTgzNTQ5Nw==') + '?text=' + encodeURIComponent(mensagem);
+
+            // Abrir WhatsApp com a mensagem
+            window.open(url, '_blank');
+        }
+        
+        // Abrir Modal de Currículo Profissional
+        function abrirFormulario() {
+            document.getElementById("formContainer").style.display = "flex";
+        }
+
+        // Fechar Modal
+        function fecharFormulario() {
+            document.getElementById("formContainer").style.display = "none";
+        }
+
+        // Abrir o modal de Serviços
+        function openModal() {
+            document.getElementById("servicesModal").style.display = "flex";
+        }
+
+        // Fechar o modal de Serviços
+        function closeModal() {
+            document.getElementById("servicesModal").style.display = "none";
+        }
+
+        // Abrir o chat do WhatsApp
+        function openChat() {
+            window.open('https://wa.me/' + decode('NTU0Mjk5OTgzNTQ5Nw=='), '_blank');
+        }
+    </script>
+</head>
+<body>
+
+<h1>Cássio Winkler</h1><br><br>
+<div class="container">
+    <a href="javascript:void(0)" onclick="openChat()" class="btn">WhatsApp</a>
+    <a href="javascript:void(0)" onclick="window.location.href='tel:' + decode('NTU0Mjk5OTgzNTQ5Nw==')" class="btn">Ligar</a>
+    <a href="javascript:void(0)" onclick="abrirFormulario()" class="btn">Currículo</a>
+    <a href="javascript:void(0)" onclick="openModal()" class="btn">Serviços</a>
+
+    <div class="social-icons">
+        <a href="https://instagram.com"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="30"></a>
+        <a href="https://linkedin.com"><img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" width="30"></a>
+        <a href="javascript:void(0)" onclick="openChat()"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="30"></a>
+    </div>
+</div>
+
+<!-- Modal de Currículo Profissional -->
+<div id="formContainer" class="modal">
+    <div class="modal-content form-container">
+        <span class="close" onclick="fecharFormulario()">&times;</span>
+        <h2>Solicitar Currículo</h2>
+        <label for="nomeCompleto">Nome Completo*</label>
+        <input type="text" id="nomeCompleto" name="nomeCompleto" required>
+
+        <label for="telefone">Telefone*</label>
+        <input type="text" id="telefone" name="telefone" required>
+
+        <label for="email">E-mail*</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="empresa">Empresa*</label>
+        <input type="text" id="empresa" name="empresa" required>
+
+        <button type="button" onclick="enviarCurriculo()">Solicitar</button>
+    </div>
+</div>
+
+<!-- Modal de Serviços -->
+<div id="servicesModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Meus Serviços</h2>
+        <p>Consultoria em TI</p>
+        <p>Desenvolvimento de Sites</p>
+        <p>Consultoria, Suporte e Customização para Sistemas ERP</p>
+        <p>Integração de Sistemas</p>
+    </div>
+</div>
+
+<!-- Ícone do WhatsApp flutuante -->
+<a href="javascript:void(0)" onclick="openChat()" class="whatsapp-float">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+</a>
+
+<footer>Todos os direitos reservados &copy; <span id="year"></span></footer>
+<script>
+    document.getElementById("year").innerText = new Date().getFullYear();
+</script>
+
+</body>
+</html>
